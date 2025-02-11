@@ -1,0 +1,353 @@
+@import url("https://minidiscordthemes.github.io/Snippets/ForumImprovements/main.css");
+/* @import url("https://aushevahmad.github.io/awesome-css/modules/custom-bar-prompt.css"); */
+/* @import url("https://minidiscordthemes.github.io/Demonstration/Demonstration.theme.css"); */
+@import url("https://minidiscordthemes.github.io/Snippets/MinimalSearchbar/main.css");
+/* @import url("https://minidiscordthemes.github.io/Snippets/DiscordReimagined/main.css"); */
+/* @import url("https://discordstyles.github.io/HorizontalServerList/HorizontalServerList.theme.css"); */
+/* @import url('https://raw.githubusercontent.com/computer-catt/PurplePrune/main/PurplePrune.css');
+@import url('https://raw.githubusercontent.com/computer-catt/PurplePrune/main/ThemeConfig.css'); */
+@import url("https://aushevahmad.github.io/awesome-css/modules/bartender.css");
+@import url(https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap);
+@import url("https://minidiscordthemes.github.io/Snippets/ModTitle/main.css");
+
+:root {
+  /* --prompt-text: "i hate this"; */
+  /* --privacy-bg-image: var(--privacy-discord-icon);
+  --privacy-bg-color: #171139; */
+  --demo-font-variant: Circular;
+  --demo-font-emoji: Noto;
+  --demo-text: censor;
+  --demo-clientmod: visible;
+  --demo-emoji-radius: 4px;
+  --demo-emoji-opacity: 0.5;
+  --demo-icon-hue: 240;
+  --demo-image-hue: 270;
+  --demo-banner-hue: 180;
+  --demo-self-hue: 300;
+  --synqats-gb-bg-0-dark: #1e2021;
+}
+
+body,
+html {
+  text-rendering: optimizeLegibility !important;
+  font-family: "Rubik", sans-serif !important;
+}
+
+/* div[class*=container] div[class*=base]:not([class*=baseLayer]):not([class*=member]):not([class*=typing]):not([class*=iconBadge]):not([class*=numberBadge]) {
+  padding-right: 16px;
+  padding-bottom: 16px;
+} */
+
+div[class*=sidebar],
+section[class*=title],
+div[class*=members],
+aside[class*=profilePanel],
+main[class*=chatContent] {
+  overflow: hidden;
+}
+
+[class^=privateChannels_] [class^=content_] {
+  display: grid;
+  height: unset !important;
+  grid-template-columns: 1fr 1fr;
+
+  &>* {
+    overflow: hidden;
+    grid-column: 1 / 3;
+  }
+}
+
+aside[class*=profilePanel] {
+  margin-left: 16px;
+}
+
+[class^=content]:has(> video[data-testid="app-spinner"]) {
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    translate: 25%;
+    width: 200px;
+    height: 180px;
+    background-image: url('https://media.discordapp.net/attachments/1251184761171480717/1261304931143520317/akiyama-yakuza_1.gif?ex=66927941&is=669127c1&hm=19bacf96fbd32c177acb80432ed94d8decf1182793859f913b76e9927bac29d1&=&width=381&height=385') !important;
+    /* https://media.discordapp.net/stickers/1217112512374505613.png?size=320 */
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+
+  video {
+    visibility: hidden;
+  }
+}
+
+/* 
+/* custom chat bar input text  */
+/* hide existing text */
+/* [class*=placeholder][class*=slateTextArea] {
+  visibility: hidden;
+} */
+
+/* add custom text 
+[class*=placeholder][class*=slateTextArea]::before {
+  visibility: visible;
+  content: var(--prompt-text);
+  /* dont break your quotes :3 
+} */
+
+[class^="channelTextArea"]::before {
+	/* duration of wakeup and go to sleep animations (in seconds) */
+	/* set to 2.65s to match windows cursor blink rate */
+	--wakeup-duration: 2s;
+	/* duration of sleeping and typing animations */
+	--sleep-duration: calc(var(--wakeup-duration) / 5 * 2);
+	/* typing animation: run, runleft, alert, or wallscratch */
+	--typing-animation: alert;
+
+	content: '';
+	width: 32px;
+	height: 32px;
+	top: -29px;
+	left: 50%; /* change right to left to move oneko to the left */
+	position: absolute;
+	image-rendering: pixelated;
+	/* background-image: url('https://raw.githubusercontent.com/adryd325/oneko.js/14bab15a755d0e35cd4ae19c931d96d306f99f42/oneko.gif'); */
+	animation: sleep var(--sleep-duration) infinite;
+}
+[class^="channelTextArea"]:hover::before {
+	animation: var(--wakeup-duration) 1 forwards wakeup;
+}
+[class^="channelTextArea"]:not(:hover)::before {
+	animation: var(--wakeup-duration) 1 forwards gotosleep,
+		var(--sleep-duration) var(--wakeup-duration) infinite sleep;
+}
+[class^="channelTextArea"]:has(.editor-H2NA06:focus)::before {
+	animation: var(--wakeup-duration) 1 forwards wakeup,
+		var(--sleep-duration) var(--wakeup-duration) infinite
+			var(--typing-animation);
+}
+@keyframes sleep {
+	0%,
+	50% {
+		background-position: -64px 0;
+	}
+	50.00001%,
+	100% {
+		background-position: -64px -32px;
+	}
+}
+@keyframes alert {
+	0%,
+	50% {
+		background-position: -224px -96px;
+	}
+	50.00001%,
+	100% {
+		background-position: -96px -96px;
+	}
+}
+@keyframes run {
+	0%,
+	50% {
+		background-position: -96px 2px;
+	}
+	50.00001%,
+	100% {
+		background-position: -96px -30px;
+	}
+}
+@keyframes runleft {
+	0%,
+	50% {
+		background-position: -128px -62px;
+	}
+	50.00001%,
+	100% {
+		background-position: -128px -94px;
+	}
+}
+@keyframes wallscratch {
+	0%,
+	50% {
+		background-position: -64px -62px;
+	}
+	50.00001%,
+	100% {
+		background-position: -64px -94px;
+	}
+}
+@keyframes wakeup {
+	0%,
+	20% {
+		background-position: -160px 0;
+	}
+	20.00001%,
+	40% {
+		background-position: -192px 0;
+	}
+	40.00001%,
+	60% {
+		background-position: -224px 0;
+	}
+	60.00001%,
+	80% {
+		background-position: -96px -64px;
+	}
+	80.00001%,
+	100% {
+		background-position: -96px -96px;
+	}
+}
+@keyframes gotosleep {
+	0%,
+	20% {
+		background-position: -96px -96px;
+	}
+	20.00001%,
+	40% {
+		background-position: -96px -64px;
+	}
+	40.00001%,
+	60% {
+		background-position: -224px 0;
+	}
+	60.00001%,
+	80% {
+		background-position: -192px 0;
+	}
+	80.00001%,
+	100% {
+		background-position: -160px 0;
+	}
+}
+
+
+@keyframes oneko {
+
+  /*
+    if you open the background image in ur browser, you will see that it has way more frames
+    so if you want, you could make ur own keyframes for a different animation
+    the top left frame is 0 0, second top row is -32 0, second row second is -32 -32 and so on
+    the ...00001% makes it so that there's no transition between the frames, so if you wanted say 3 frames, you'd do 0%, 33.3%; 33.30001%, 66.6%; 66.60001%, 100%
+    */
+  0%,
+  50% {
+    background-position: -64px 0;
+  }
+
+  50.0001%,
+  100% {
+    background-position: -64px -32px;
+  }
+}
+
+[data-list-item-id="guildsnav___home"] {
+  content: url(https://cdn.discordapp.com/emojis/1024751291504791654.gif?size=256&quality=lossless);
+}
+/* 
+/* 
+:root::after {
+    content: "";
+    position: absolute;
+    z-index: 999999;
+    height: 5%;
+    aspect-ratio: 1/1;
+    background: url(https://media.discordapp.net/stickers/1217112512374505613.png) center / contain no-repeat;
+    offset: rect(auto auto auto auto round 10%) reverse / bottom;
+    animation: move 10s linear infinite;
+    pointer-events: none;
+}
+@keyframes move {
+    from { offset-distance: 0%; }
+    to { offset-distance: 100%; }
+} */
+
+:is(main, section)[class^=chatContent]>form,
+form>div[class^=submitContainer] {
+  /* align chatbox */
+  /* padding: 0px;
+
+  >div>div[class^=channelTextArea] {
+    margin: 0px !important;
+
+    >div[class^=scrollableContainer] {
+      min-height: 49px;
+      padding-top: 4px;
+      border-radius: 0px;
+    }
+  } */
+
+  /* align forum channel thing */
+  >div {
+    margin-bottom: 0px;
+    border-radius: 0px;
+  }
+
+  /* move slowmode/typing indicator to match */
+  >div[class^=typing] {
+    top: -24px;
+    right: calc(var(--custom-index-scrollbar-margin) * 2 + var(--custom-index-scrollbar-width));
+    margin-left: auto;
+    width: fit-content;
+    padding-left: 2px;
+    padding-right: 9px;
+    border-radius: 8px 8px 0px 0px;
+    background-color: var(--channeltextarea-background);
+  }
+
+  /* make scrollbar meet chatbox */
+  &::after {
+    display: none;
+  }
+
+  /* fix replies */
+  >div>div>div[class^=attachedBars] {
+    min-height: unset !important;
+    padding-bottom: 4px;
+  }
+}
+
+[aria-label="Channels"] [class^="content"],
+[class^="popout-"] [class^="row-"] {
+  border-style: solid;
+  border-width: 0px;
+  border-color: transparent;
+  background-color: transparent;
+}
+
+/* Hide chat bar if no perms  */
+/* [class*=channelTextAreaDisabled] {
+    display: none!important;
+} */
+
+/* or if it doesn't work like because of themes:  */
+/* [class*=channelTextAreaDisabled] {
+    opacity: 0!important;
+    position: absolute!important;
+    height: 0px!important;
+    width: 0px!important;
+    z-index: 0!important;
+}  */
+
+[class*="root"][class*="fullscreenOnMobile"],
+[class*="userProfileOuter"] {
+  overflow: visible
+}
+
+.visibleContainer_adf761 .biteSize__4396a {
+  top: -162px !important;
+  left: -2px !important;
+  color: var(--primary-600) !important;
+}
+
+.statusBubbleOuter__7e51b:before,
+.statusBubbleOuter__7e51b:after {
+  display: none;
+}
+
+.invisibleContainer__1e05d biteSize__4396a {
+  display: none !important;
+} 
